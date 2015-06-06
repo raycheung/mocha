@@ -20,7 +20,7 @@ class SearchNexmoDeliveredMessage < Struct.new(:nexmo_delivery_receipt_id)
   end
 
   def success(_job)
-    Rails.logger.debug "messageId: #{@nexmo_delivery_receipt.message_id} type: #{@nexmo_delivery_receipt.type} body: [#{@nexmo_delivery_receipt.body}]"
+    Rails.logger.debug "messageId: #{@nexmo_delivery_receipt.message_id} body: [#{@nexmo_delivery_receipt.body}]"
   end
 
   def error
