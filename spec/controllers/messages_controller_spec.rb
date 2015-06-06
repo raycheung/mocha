@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe MessagesController, type: :controller do
+  before { request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(Rails.application.secrets.api_token) }
+
   describe '#index' do
     let!(:outbound) { FactoryGirl.create_list(:nexmo_delivery_receipt, 3, :full, msisdn: '85293806050', status: 'delivered') }
     let!(:inbound) { FactoryGirl.create_list(:nexmo_inbound_message, 2, :concat, msisdn: '85293806050') }

@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  before_action :authenticate
+
   def index
     params.require(:mobile)
 
@@ -11,4 +13,12 @@ class MessagesController < ApplicationController
   rescue ActionController::ParameterMissing
     render status: :bad_request
   end
+
+  private
+
+    def authenticate
+      authenticate_or_request_with_http_token do |token, options|
+        token == Rails.application.secrets.api_token
+      end
+    end
 end
