@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606100534) do
+ActiveRecord::Schema.define(version: 20150606130247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,22 @@ ActiveRecord::Schema.define(version: 20150606100534) do
     t.integer  "latency"
     t.string   "final_status"
     t.string   "error_code_label"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "nexmo_inbound_messages", force: :cascade do |t|
+    t.string   "type"
+    t.string   "to"
+    t.string   "msisdn"
+    t.string   "message_id"
+    t.datetime "message_timestamp"
+    t.text     "text"
+    t.string   "keyword"
+    t.boolean  "concat"
+    t.string   "concat_ref"
+    t.integer  "concat_total"
+    t.integer  "concat_part"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
