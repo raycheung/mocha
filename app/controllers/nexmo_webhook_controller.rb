@@ -1,5 +1,7 @@
 class NexmoWebhookController< ApplicationController
   def dlr_callback
+    params.require(:messageId)
+
     dr = NexmoDeliveryReceipt.create!(
       to: params['to'],
       network_code: params['network-code'],

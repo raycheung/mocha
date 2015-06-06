@@ -17,6 +17,13 @@ RSpec.describe NexmoWebhookController, type: :controller do
       }
     end
 
+    context 'if messageId is missing' do
+      it 'does nothing' do
+        query_hash.delete("messageId")
+        expect { get :dlr_callback, query_hash }.not_to change { NexmoDeliveryReceipt.count }
+      end
+    end
+
     it 'records the delivery receipt' do
       expect(Delayed::Job).to receive(:enqueue).with(an_instance_of(SearchNexmoDeliveredMessage))
 
