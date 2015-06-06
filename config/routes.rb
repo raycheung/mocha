@@ -54,5 +54,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
+  # Nexmo callbacks
   get 'nexmo/dr', to: 'nexmo_webhook#dlr_callback'
+  get 'nexmo/inbound', to: 'nexmo_webhook#inbound'
 end
