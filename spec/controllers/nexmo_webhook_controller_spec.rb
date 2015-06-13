@@ -27,7 +27,9 @@ RSpec.describe NexmoWebhookController, type: :controller do
     end
 
     it 'records the delivery receipt' do
-      expect(Delayed::Job).to receive(:enqueue).with(an_instance_of(SearchNexmoDeliveredMessage))
+      # FIXME: somehow mocking :enqueue doesn't work, expect on the :perform
+      # expect(Delayed::Job).to receive(:enqueue).with(an_instance_of(SearchNexmoDeliveredMessage))
+      expect_any_instance_of(SearchNexmoDeliveredMessage).to receive(:perform)
 
       expect { get :dlr_callback, query_hash }.to change { NexmoDeliveryReceipt.count }.by(1)
 
