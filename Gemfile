@@ -28,7 +28,7 @@ gem 'nexmo'
 
 group :development, :test do
   # Our test framework
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.3'
   gem 'factory_girl_rails'
 
   # Better Rails console
