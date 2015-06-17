@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.1.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.2'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
