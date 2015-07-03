@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606130247) do
+ActiveRecord::Schema.define(version: 20150703075303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,42 @@ ActiveRecord::Schema.define(version: 20150606130247) do
     t.integer  "concat_part"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "twilio_inbound_messages", force: :cascade do |t|
+    t.string   "message_sid"
+    t.string   "sms_sid"
+    t.string   "sms_message_sid"
+    t.string   "account_sid"
+    t.string   "from_number"
+    t.string   "to_number"
+    t.text     "body"
+    t.integer  "num_media"
+    t.string   "from_city"
+    t.string   "from_state"
+    t.string   "from_country"
+    t.string   "from_zip"
+    t.string   "to_city"
+    t.string   "to_state"
+    t.string   "to_country"
+    t.string   "to_zip"
+    t.string   "api_version"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "twilio_message_receipts", force: :cascade do |t|
+    t.string   "message_sid"
+    t.string   "sms_sid"
+    t.string   "account_sid"
+    t.string   "from_number"
+    t.string   "to_number"
+    t.text     "body"
+    t.integer  "num_media"
+    t.string   "message_status"
+    t.string   "error_code"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
