@@ -59,4 +59,8 @@ Rails.application.routes.draw do
   # Nexmo callbacks
   get 'nexmo/dr', to: 'nexmo_webhook#dlr_callback'
   get 'nexmo/inbound', to: 'nexmo_webhook#inbound'
+
+  # Twilio callbacks
+  post 'twilio/status_callback', to: 'twilio_webhook#status_callback'
+  post 'twilio/inbound', to: 'twilio_webhook#inbound'
 end
