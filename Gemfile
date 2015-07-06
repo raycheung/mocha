@@ -17,6 +17,9 @@ gem 'jbuilder', '~> 2.3'
 # Use Puma as the app server
 gem 'puma'
 
+# So we don't need a long-running worker
+gem 'workless'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
