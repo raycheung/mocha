@@ -65,5 +65,6 @@ Rails.application.routes.draw do
   post 'twilio/inbound', to: 'twilio_webhook#inbound'
 
   # Mandrill callbacks
+  get 'mandrill/message_event', to: 'mandrill_webhook#health_check'
   post 'mandrill/message_event', to: 'mandrill_webhook#message_event'
 end
