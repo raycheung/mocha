@@ -7,3 +7,7 @@ For inbound messages, please set the `Request URL` under the `SMS & MMS` section
 
 ### Nexmo
 Make sure the endpoint is set to [Nexmo's console](https://dashboard.nexmo.com/private/settings) after deployment.
+
+### Mandrill
+Register the webhook under [Webhooks](https://mandrillapp.com/settings/webhooks) in the Settings.
+

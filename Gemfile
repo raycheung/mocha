@@ -14,6 +14,9 @@ gem 'jbuilder', '~> 2.3'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Use mongodb for other persistence
+gem "mongoid", "~> 4.0.0"
+
 # Use Puma as the app server
 gem 'puma'
 
@@ -48,3 +51,6 @@ group :development, :test do
   gem 'spring-commands-rspec'
 end
 
+group :test do
+  gem 'mongoid-rspec', '~> 2.1.0'
+end
