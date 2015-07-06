@@ -63,4 +63,7 @@ Rails.application.routes.draw do
   # Twilio callbacks
   post 'twilio/status_callback', to: 'twilio_webhook#status_callback'
   post 'twilio/inbound', to: 'twilio_webhook#inbound'
+
+  # Mandrill callbacks
+  post 'mandrill/message_event', to: 'mandrill_webhook#message_event'
 end
