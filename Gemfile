@@ -52,5 +52,6 @@ group :development, :test do
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'mongoid-rspec', '~> 2.1.0'
 end
