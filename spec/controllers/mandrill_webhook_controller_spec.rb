@@ -9,7 +9,7 @@ RSpec.describe MandrillWebhookController, type: :controller do
     end
 
     it "records the message event for later processing" do
-      expect_any_instance_of(ProcessMandrillMessageEvents).to receive(:perform)
+      expect(Delayed::Job).to receive(:enqueue).with(an_instance_of(ProcessMandrillMessageEvents))
 
       expect { post :message_event, post_params }.to change { MandrillMessageEventRequest.count }.by(1)
       expect(response).to have_http_status(:success)
@@ -24,7 +24,7 @@ RSpec.describe MandrillWebhookController, type: :controller do
       let(:post_params) { { } }
 
       it "responds as a bad request" do
-        expect_any_instance_of(ProcessMandrillMessageEvents).not_to receive(:perform)
+        expect(Delayed::Job).not_to receive(:enqueue).with(an_instance_of(ProcessMandrillMessageEvents))
 
         expect { post :message_event, post_params }.not_to change { MandrillMessageEventRequest.count }
         expect(response).to have_http_status(:bad_request)
@@ -35,7 +35,7 @@ RSpec.describe MandrillWebhookController, type: :controller do
       let(:post_params) { { "mandrill_events" => "[]" } }
 
       it "responds as a bad request" do
-        expect_any_instance_of(ProcessMandrillMessageEvents).not_to receive(:perform)
+        expect(Delayed::Job).not_to receive(:enqueue).with(an_instance_of(ProcessMandrillMessageEvents))
 
         expect { post :message_event, post_params }.not_to change { MandrillMessageEventRequest.count }
         expect(response).to have_http_status(:bad_request)
