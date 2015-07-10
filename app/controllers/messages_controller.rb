@@ -16,9 +16,15 @@ class MessagesController < ApplicationController
   end
 
   def create
-    params.require(:messages)
-
-    ProcessGenericMessagesJob.perform_later(GenericMessagesRequest.create(messages: params[:messages]).id.to_s)
+    messages = params.require(:messages)
+    messages.each do |message|
+      GenericMessage.create(
+        sender: message["sender"],
+        recipient: message["recipient"],
+        body: message["body"],
+        received_at: message["received_at"]
+      )
+    end
 
     render nothing: true, status: :ok
   end

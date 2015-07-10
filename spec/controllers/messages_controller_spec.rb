@@ -50,9 +50,7 @@ RSpec.describe MessagesController, type: :controller do
     end
 
     it 'stores the payload containing generic messages' do
-      expect(ProcessGenericMessagesJob).to receive(:perform_later).with(an_instance_of(String))
-
-      expect { post :create, hash, format: :json }.to change { GenericMessagesRequest.count }.by(1)
+      expect { post :create, hash, format: :json }.to change { GenericMessage.count }.by(5)
       expect(response).to have_http_status(:success)
     end
   end
