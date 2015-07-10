@@ -53,5 +53,14 @@ RSpec.describe MessagesController, type: :controller do
       expect { post :create, hash, format: :json }.to change { GenericMessage.count }.by(5)
       expect(response).to have_http_status(:success)
     end
+
+    context 'if the same message arrive again' do
+      it 'ignores the duplicated' do
+        expect { post :create, hash, format: :json }.to change { GenericMessage.count }.by(5)
+
+        new_hash = { messages: [hash[:messages].last] }
+        expect { post :create, new_hash, format: :json }.not_to change { GenericMessage.count }
+      end
+    end
   end
 end

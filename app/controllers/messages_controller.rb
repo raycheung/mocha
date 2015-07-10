@@ -18,12 +18,12 @@ class MessagesController < ApplicationController
   def create
     messages = params.require(:messages)
     messages.each do |message|
-      GenericMessage.create(
+      GenericMessage.new(
         sender: message["sender"],
         recipient: message["recipient"],
         body: message["body"],
         received_at: message["received_at"]
-      )
+      ).upsert
     end
 
     render nothing: true, status: :ok
