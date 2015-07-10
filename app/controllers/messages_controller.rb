@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :authenticate
+  skip_before_action :verify_authenticity_token, only: [:create]
 
   def index
     params.require(:mobile)
@@ -12,6 +13,14 @@ class MessagesController < ApplicationController
                       sort_by! { |m| [m["message_timestamp"], m["type"]] }
   rescue ActionController::ParameterMissing
     render status: :bad_request
+  end
+
+  def create
+    params.require(:messages)
+
+    ProcessGenericMessagesJob.perform_later(GenericMessagesRequest.create(messages: params[:messages]).id.to_s)
+
+    render nothing: true, status: :ok
   end
 
   private
