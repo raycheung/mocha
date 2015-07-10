@@ -3,5 +3,6 @@ class ProcessMandrillMessageEvents < Struct.new(:mandrill_message_event_request_
     mandrill_request = MandrillMessageEventRequest.find(mandrill_message_event_request_id)
     events = JSON.parse(mandrill_request.mandrill_events)
     events.each { |event| MandrillMessageEvent.new(event).upsert }
+    mandrill_request.destroy
   end
 end

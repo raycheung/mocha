@@ -11,6 +11,7 @@ RSpec.describe ProcessMandrillMessageEvents, type: :job do
       expect { ProcessMandrillMessageEvents.new(mandrill_request.id).perform }.to change { MandrillMessageEvent.count }.by(1)
 
       expect(MandrillMessageEvent.last.msg["subject"]).to eq("the email subject")
+      expect { MandrillMessageEventRequest.find(mandrill_request.id) }.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
 
     # By experiment, Mandrill may send the same event more than once
@@ -26,6 +27,7 @@ RSpec.describe ProcessMandrillMessageEvents, type: :job do
         expect { ProcessMandrillMessageEvents.new(mandrill_request_again.id).perform }.not_to change { MandrillMessageEvent.count }
 
         expect(MandrillMessageEvent.last.msg["subject"]).to eq("the email subject (updated)")
+        expect { MandrillMessageEventRequest.find(mandrill_request_again.id) }.to raise_error(Mongoid::Errors::DocumentNotFound)
       end
     end
   end
